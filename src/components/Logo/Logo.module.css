@@ -1,0 +1,10 @@
+.Logo{
+    height: 80%;
+}
+.Logo:hover{
+    cursor: pointer;
+}
+.LogoImage{
+    height:40px;
+    width: 40px;
+}

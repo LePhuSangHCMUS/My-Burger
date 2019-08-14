@@ -1,0 +1,7 @@
+.Toolbar{
+    display: flex;
+    height: 3.5rem;
+    background-color: #00a8ff;
+    justify-content: space-around;
+    align-items: center;
+}

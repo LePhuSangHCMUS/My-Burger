@@ -1,0 +1,21 @@
+.BurgerControls{
+    text-align: center;
+    border: 1px solid rgba(0, 140, 255, 0.692);
+    height: 50vh;
+
+}
+.ButtonOrderNow{
+    padding: 1rem 2rem;
+    background-color: #00a8ff;
+    border: none;
+    border-radius: 5%;
+    margin: 1rem 0;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    outline-color: #fbc531;
+}
+.ButtonOrderNow:disabled{
+    background-color: #00aaff56;
+  
+}

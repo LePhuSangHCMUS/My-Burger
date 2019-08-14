@@ -1,0 +1,47 @@
+.BurgerControl {
+    display        : flex;
+    padding-bottom        : 1rem;
+    align-items    : center;
+    font-weight    : bold;
+    font-size      : 18px;
+    justify-content: center;
+
+}
+
+.Label {
+    width     : 30%;
+    text-align: start;
+    color: #00a8ff
+}
+
+.ButtonGroup {}
+
+.ButtonLess {
+    background-color: #d63031;
+    border          : none;
+    padding         : 0.4rem 1rem;
+    margin          : 0 1rem;
+    cursor          : pointer;
+    color           : white;
+    border-radius: 5%;
+    outline-color: #fbc531;
+}
+
+.ButtonMore {
+    background-color: #4cd137;
+    border          : none;
+    padding         : 0.4rem 1rem;
+    margin          : 0 1rem;
+    color           : white;
+    cursor          : pointer;
+    border-radius: 5%;
+    outline-color: #fbc531;
+
+
+}
+
+.ButtonLess:disabled,
+.ButtonLess[disabled]{
+  border: 1px solid #999999;
+  background-color: #d6303059;
+}

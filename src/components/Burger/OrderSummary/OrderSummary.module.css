@@ -1,0 +1,12 @@
+.OrderDescription {}
+
+.OrderTitle {}
+
+.OrderList {
+    text-align: start;
+}
+
+.OrderItem {
+    margin: 1rem;
+
+}

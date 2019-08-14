@@ -1,0 +1,22 @@
+.Btn {
+    padding: 0.5rem 1rem;
+    border : none;
+    margin : 0.5rem;
+    cursor : pointer;
+    color  : white;
+    font-weight: bold;
+    border-radius: 5%;
+}
+
+.Danger {
+    background-color: #d63031;
+}
+
+.Success {
+    background-color: #4cd137;
+}
+
+.Primary {
+    background-color: #00a8ff;
+
+}
