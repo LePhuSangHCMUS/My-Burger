@@ -2,7 +2,6 @@ import React from 'react'
 import BurgerControl from './BurgerControl/BurgerControl'
 import classes from './BurgerControls.module.css'
 export default (props) => {
-console.log('CTRls',props)
     const controlsLabel = [
         {
             label: 'Meat',

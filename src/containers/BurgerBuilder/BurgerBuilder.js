@@ -30,7 +30,6 @@ export default class BurgerBuilder extends Component {
     }
 
     upDatePurchasable(newIngredients) {
-        console.log("New", newIngredients)
         const ingredients = { ...newIngredients };
         let quantityIngredients = 0;
         for (let type in ingredients) {
@@ -51,8 +50,7 @@ export default class BurgerBuilder extends Component {
     }
     //====================================================
     addIngredientHandle(type) {
-        console.log(type);
-        console.log(this.state)
+  
         //So luong tang len 1
 
         const oldTypeCount = this.state.ingredients[type];
@@ -75,8 +73,7 @@ export default class BurgerBuilder extends Component {
     removeIngredientHandle(type) {
         const oldTypeCount = this.state.ingredients[type];
         if (oldTypeCount >= 1) {
-            console.log(type);
-            console.log(this.state)
+
             //So luong tang len 1
             let newTypeCount = oldTypeCount - 1;
             //===========================
@@ -104,6 +101,7 @@ export default class BurgerBuilder extends Component {
             disabledInfo[type] = disabledInfo[type] === 0;
         }
         return (
+    
             <Aux>
                 {/* Modal Bao gom Backdrop va OrderSummary */}
                 <Modal showPurchasingModal={this.state.showPurchasingModal} hiddenPurchasingModalHandle={this.hiddenPurchasingModalHandle.bind(this)}>
@@ -113,7 +111,9 @@ export default class BurgerBuilder extends Component {
                         continuePruchasingModalHandle={this.continuePruchasingModalHandle.bind(this)}
                         totalPrice={this.state.totalPrice.toFixed(2)}
                     />
+                
                 </Modal>
+            
                 <Burger ingredients={this.state.ingredients} />
                 <BurgerControls
                     addIngredientHandle={this.addIngredientHandle.bind(this)}

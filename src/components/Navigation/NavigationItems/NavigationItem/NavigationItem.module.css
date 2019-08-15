@@ -1,0 +1,23 @@
+.NavigationItem {
+    list-style-type: none;
+
+}
+
+.NavigationItemLink {
+    text-decoration: none;
+    color          : white;
+    font-weight    : bold;
+    display        : inline-block;
+    height         : 100%;
+    margin         : 0 0.5rem;
+    padding        : 0 0.5rem;
+    line-height    : 56px;
+}
+
+.NavigationItemLink:active,
+.NavigationItemLink:hover,
+.NavigationItemLink.IsActive
+{
+    background: rgba(255, 255, 255, 0.432);
+
+}

@@ -7,21 +7,22 @@ import BurgerGredient from './BurgerIngredient/BurgerIngredient'
 export default (props) => {
     const transformedIngredient =
         Object.keys(props.ingredients).map(type => {
-            {/*Ep số thành mang roi dung spread de chuyen thanh mang n* undefined  */ }
-            {/*Array(2)=[<2 emptys item >]===> [...Array(2)]=[undefined,undefined] */ }
-            return [...Array(props.ingredients[type])].map((undefined, index) => {
+            /*Ep số thành mang roi dung spread de chuyen thanh mang n* undefined  */ 
+            /*Array(2)=[<2 emptys item >]===> [...Array(2)]=[undefined,undefined] */ 
+            return [...Array(props.ingredients[type])].map((Undefined, index) => {
                 return <BurgerGredient key={type+index} type={type} />
             })
         })
             .reduce((arr, element) => {
                 return arr.concat(element)
             }, [])
-    console.log(transformedIngredient.length)
+    // console.log(transformedIngredient.length)
 
     return (
         <div className={classes.Burger}>
             <BurgerGredient type='bread-top' />
             {
+            
                 transformedIngredient.length ? transformedIngredient : <div className={classes.PleaseAddIngredient}>Please Start Add Ingredient</div>
             }
             <BurgerGredient type='bread-bottom' />

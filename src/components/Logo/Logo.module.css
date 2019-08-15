@@ -1,5 +1,6 @@
 .Logo{
     height: 80%;
+    margin: 0 1rem;
 }
 .Logo:hover{
     cursor: pointer;

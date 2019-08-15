@@ -1,0 +1,19 @@
+.SideDrawer{
+    width: 50vw;
+    background-color: #0985e3e0;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    z-index: 999999;
+     transition: all 0.5s ease-out;
+}
+.Open{
+    left:0;
+}
+.Logo{
+    margin-top: 1rem;
+}
+.Nav{
+
+}
