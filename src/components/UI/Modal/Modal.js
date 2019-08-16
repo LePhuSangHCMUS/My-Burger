@@ -28,7 +28,7 @@ export default class extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        if (this.props.showPurchasingModal !== nextProps.showPurchasingModal) {
+        if (this.props.showPurchasingModal !== nextProps.showPurchasingModal || this.props.loading!== nextProps.loading) {
             return true;
         }
         return false;
