@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Aux from '../../hoc/Auxx'
+import axios from 'axios'//Thay bang AxiosInstance Có config Authotication urlBase 
+import axiosInstance from '../../axios-orders-instance'
 
 
 //Them Vao Burgerbuiler
@@ -46,11 +48,29 @@ export default class BurgerBuilder extends Component {
 
     }
     continuePruchasingModalHandle() {
-        alert('Continue')
+        //Do config global ch Axios install nen khong can duong dan vao databas
+        //https://react-my-burger-ab7d9.firebaseio.com/
+        const order={
+            ingredients:this.state.ingredients,
+            price:this.state.totalPrice,
+            customer:{
+                name:'Lê Phú Sang',
+                address:{
+                    street:'Tran Hung Dao',
+                    zipCode:'800000', 
+                    country:'Viet Nam'
+                },
+                email:'lehsangus@gmail.com',
+                deliverMethod:'fastest'
+
+            }
+        }
+
+        axiosInstance.post("/orders.json",order)
     }
     //====================================================
     addIngredientHandle(type) {
-  
+
         //So luong tang len 1
 
         const oldTypeCount = this.state.ingredients[type];
@@ -101,7 +121,7 @@ export default class BurgerBuilder extends Component {
             disabledInfo[type] = disabledInfo[type] === 0;
         }
         return (
-    
+
             <Aux>
                 {/* Modal Bao gom Backdrop va OrderSummary */}
                 <Modal showPurchasingModal={this.state.showPurchasingModal} hiddenPurchasingModalHandle={this.hiddenPurchasingModalHandle.bind(this)}>
@@ -111,9 +131,9 @@ export default class BurgerBuilder extends Component {
                         continuePruchasingModalHandle={this.continuePruchasingModalHandle.bind(this)}
                         totalPrice={this.state.totalPrice.toFixed(2)}
                     />
-                
+
                 </Modal>
-            
+
                 <Burger ingredients={this.state.ingredients} />
                 <BurgerControls
                     addIngredientHandle={this.addIngredientHandle.bind(this)}

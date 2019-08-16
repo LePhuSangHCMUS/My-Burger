@@ -2,16 +2,16 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <link rel="shortcut icon" href="%PUBLIC_URL%/burgerIcon.jpg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" />
-  <meta name="description" content="Web site created using create-react-app" />
-  <!--
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/burgerIcon.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Web site created using create-react-app" />
+    <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-  <!--
+    <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -24,17 +24,16 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">
 
-  <!--Google Font-->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,700i&display=swap"
-    rel="stylesheet">
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,700i&display=swap" rel="stylesheet">
 
-  <title>My Burger</title>
+    <title>My Burger</title>
 </head>
 
 <body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-  <!--
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -44,6 +43,26 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyAXYsrqobFSPphXRNK7fbYeAPOOHpO9Wjs",
+            authDomain: "react-my-burger-ab7d9.firebaseapp.com",
+            databaseURL: "https://react-my-burger-ab7d9.firebaseio.com",
+            projectId: "react-my-burger-ab7d9",
+            storageBucket: "",
+            messagingSenderId: "875981834644",
+            appId: "1:875981834644:web:b62a664d403055b3"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
 </body>
 
 </html>
