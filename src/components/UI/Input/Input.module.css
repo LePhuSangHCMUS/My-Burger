@@ -1,6 +1,13 @@
 .Input{
     padding: 0.5rem;
     margin-bottom: 0.5rem;
+    width: 50%;
+}
+.InputSelect{
+    width: 50%;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    box-sizing: content-box;
 }
 .Input:focus{
     background-color: rgba(128, 128, 128, 0.651);

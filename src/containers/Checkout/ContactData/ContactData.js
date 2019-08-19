@@ -16,19 +16,44 @@ export default class ContactData extends Component {
             meat: 0
 
         },
+        disableOrder: true,
+
         totalPrice: 0,
         name: '',
         email: '',
         address: {
             street: '',
             postalCode: ''
-        }
+        },
+        deliveryMethod: 'Fastest'
+        //Co the dung form config nhung phuc tap khi nao vao du an thi lam
+        //Cau hinh form de khong phai tao nhieu input
+        // orderFormConfig: {
+        //     name: {
+        //         elementType: 'input',
+        //         elementConfig: {
+        //             type:'text',
+        //             name:'name',
+        //             placeholder:'Name'
+        //         }
+        //     }
+        // }
     }
     onChangeHandle(event) {
         if (event.target.name === 'street' || event.target.name === 'postalCode') {
-            return this.setState({ address: { ...this.state.address, [event.target.name]: event.target.value } })
+            return this.setState({ address: { ...this.state.address, [event.target.name]: event.target.value } },()=>{
+                if (this.state.name !== '' && this.state.email !== '' &&  this.state.address.postalCode !== '') {
+              
+                    this.setState({ disableOrder: false })
+                }
+                else{
+                    this.setState({ disableOrder: true })
+ 
+                }
+            })
         }
         this.setState({ [event.target.name]: event.target.value })
+        this.setState({ disableOrder: true });
 
     }
     OrderHandle(event) {
@@ -45,7 +70,7 @@ export default class ContactData extends Component {
                 name: this.state.name,
                 address: { ...this.state.address },
                 email: this.state.email,
-                deliverMethod: 'fastest'
+                deliverMethod: this.state.deliverMethod
 
             }
         }
@@ -67,6 +92,7 @@ export default class ContactData extends Component {
 
             })
     }
+
     componentDidMount() {
         const ingredients = {};
         let totalPrice = 0;
@@ -85,7 +111,6 @@ export default class ContactData extends Component {
     }
     render() {
         console.log(this.state);
-
         return (
             <div>
                 {this.state.loading ? <Spinner /> : (<Aux><Burger ingredients={this.state.ingredients} />
@@ -93,35 +118,56 @@ export default class ContactData extends Component {
                         <h4>Enter Your Contact</h4>
                         <form>
                             <Input
+                                inputtype='input'//viet thuong thi React se khong canh bao khi convert attribute khong ton tai trong prop
                                 type='text'
                                 placeholder='Name'
                                 name='name'
                                 label='Name'
                                 onChange={this.onChangeHandle.bind(this)}
+                                value={this.state.name}
                             />
                             <Input
+                                inputtype='input'
                                 type='text'
                                 placeholder='Email'
                                 name='email'
                                 label='Email'
                                 onChange={this.onChangeHandle.bind(this)}
+                                value={this.state.email}
+
                             />
                             <Input
+                                inputtype='input'
                                 type='text'
                                 placeholder='Street'
                                 name='street'
                                 label='Street'
                                 onChange={this.onChangeHandle.bind(this)}
+                                value={this.state.address.street}
+
                             />
                             <Input
+                                inputtype='input'
                                 type='text'
                                 placeholder='Postal Code'
-                                name='postalcode'
+                                name='postalCode'
                                 label='Postal Code'
                                 onChange={this.onChangeHandle.bind(this)}
+                                value={this.state.address.postalcode}
+
+                            />
+                            <Input
+                                inputtype='select'
+                                placeholder='Delivery'
+                                name='deliveryMethod'
+                                label='Delivery'
+                                onChange={this.onChangeHandle.bind(this)}
+                                option={['Fastest', 'Cheapest']}
+                                value={this.state.deliveryMethod}
+
                             />
 
-                            <Btn btnType='Success' onClicked={this.OrderHandle.bind(this)}>ORDER</Btn>
+                            <Btn btnType='Success' onClicked={this.OrderHandle.bind(this)} disabled={this.state.disableOrder}>ORDER</Btn>
                         </form>
 
                     </div></Aux>)}

@@ -10,9 +10,13 @@ export default class Orders extends Component {
     componentDidMount() {
         axiosInstance.get('/orders.json')
             .then(response => {
+                
                 console.log(response);
                 this.setState({ loading: false })
-                this.setState({ orders: response.data })
+                if(response.data){
+                    this.setState({ orders: response.data })
+
+                }
             })
             .catch(err => {
                 console.log(err);

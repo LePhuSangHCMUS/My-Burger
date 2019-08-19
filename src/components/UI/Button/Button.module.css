@@ -11,11 +11,17 @@
 .Danger {
     background-color: #d63031;
 }
+.Danger:disabled{
+    background-color: hsl(360, 67%, 51%);
 
+}
 .Success {
     background-color: #4cd137;
 }
+.Success:disabled{
+    background-color: #4cd1378e;
 
+}
 .Primary {
     background-color: #00a8ff;
 
