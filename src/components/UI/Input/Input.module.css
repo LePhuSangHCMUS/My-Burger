@@ -1,0 +1,13 @@
+.Input{
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+.Input:focus{
+    background-color: rgba(128, 128, 128, 0.651);
+    outline: none;
+}
+.InputItem label{
+    display: inline-block;
+    width: 100px;
+    text-align: start;
+}

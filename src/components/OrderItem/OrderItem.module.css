@@ -1,0 +1,18 @@
+.OrderItem {
+    width: 80%;
+    margin: 1rem auto;
+    border: 1px solid black;
+    text-align: start;
+    padding: 1rem;
+}
+
+.OrderItem span {
+    display: inline-block;
+    border: 1px solid gray;
+    margin: 0.5rem;
+    padding:0.2rem;
+}
+.OrderItem strong{
+    font-weight: bold;
+    margin-right: 1rem;
+}

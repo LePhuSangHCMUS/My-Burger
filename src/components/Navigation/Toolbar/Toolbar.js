@@ -5,6 +5,7 @@ import NavigationItems from '../NavigationItems/NavigationItems'
 import DrawToggle from './DrawToggle/DrawToggle'
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import SideDrawer from '../SideDrawer/SideDrawer'
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 
 export default class extends Component {
     state={
@@ -26,7 +27,7 @@ export default class extends Component {
                 <Backdrop showBackdrop={this.state.showBackdrop} clicked={this.hiddenSideDrawerHandle.bind(this)} />
                 <SideDrawer showSideDrawer={this.state.showSideDrawer} />
                 <DrawToggle clicked={this.showSideDrawerHandle.bind(this)} />
-                <Logo />
+                <NavLink to='/'><Logo /></NavLink>
                 <nav className={classes.Nav}>
                     <NavigationItems toolBar={true} />
                 </nav>

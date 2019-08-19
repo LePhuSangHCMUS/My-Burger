@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Aux from '../../hoc/Auxx'
+import Aux from '../../hoc/Auxx/Auxx'
 import axios from 'axios'//Thay bang AxiosInstance Có config Authotication urlBase 
 import axiosInstance from '../../axios-orders-instance'
-
+import withErrorHandle from '../../hoc/withErrorHandle/withErrorHandle'
 //Spinner
 import Spinner from '../../components/UI/Spinner/Spinner'
 //Them Vao Burgerbuiler
@@ -19,7 +19,7 @@ const INGREDIENT_PRICE = {
     cheese: 0.2,
     meat: 0.3
 }
-export default class BurgerBuilder extends Component {
+class BurgerBuilder extends Component {
     state = {
         ingredients: {
             salad: 0,
@@ -30,7 +30,25 @@ export default class BurgerBuilder extends Component {
         totalPrice: 2,//Mặc định bánh mỳ không la 2 $,
         purchasable: true,//Disable or enable button OrderNow
         showPurchasingModal: false,//Click button se hien Modal
-        loading: false
+        loading: true
+    }
+    componentDidMount() {
+        axiosInstance.get('/ingredients.json')
+            .then(response => {
+                let newTotalPrice = 2;
+                for (let type in response.data) {
+                    newTotalPrice += response.data[type] * INGREDIENT_PRICE[type]
+                }
+                this.setState({ ingredients: { ...response.data }, totalPrice: newTotalPrice });
+                this.setState({ loading: false });
+                if (newTotalPrice > 2) {
+                    this.setState({ purchasable: false })
+                }
+            })
+            .catch(err => {
+                console.log(err);
+
+            })
     }
 
     upDatePurchasable(newIngredients) {
@@ -51,38 +69,25 @@ export default class BurgerBuilder extends Component {
     }
     continuePruchasingModalHandle() {
 
-        //Khi Ma nhấn nut continus thi bắt đầu gửi request thi xuất hiện spinner va ẩn SummaryOrder đi
-        this.setState({ loading: true })
-        //Do config global ch Axios install nen khong can duong dan vao databas
-        //https://react-my-burger-ab7d9.firebaseio.com/
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
-            customer: {
-                name: 'Lê Phú Sang',
-                address: {
-                    street: 'Tran Hung Dao',
-                    zipCode: '800000',
-                    country: 'Viet Nam'
-                },
-                email: 'lehsangus@gmail.com',
-                deliverMethod: 'fastest'
+        //===> Viet cach khac de gui da ta thong qua router dung :  Query Params
+        let queryParams = [];
 
-            }
+        for (let i in this.state.ingredients) {
+            //encodeURIComponent tao mot chuoi hop le tren URL
+            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
         }
-
-        axiosInstance.post("/orders.json", order).then(response => {
-            //Bao gio nhan du lieu ve thi set la mat Spinner va mat luon modle
-            this.setState({ loading: false, showPurchasingModal: false });
-            console.log('Add Order Success', response);
+        queryParams.push(encodeURIComponent("totalPrice") + '=' + encodeURIComponent(this.state.totalPrice))
+        const stringQuerryParams = queryParams.join('&');
 
 
-        })
-            .catch(err => {
-                console.log('Add Order Err:', err);
-                this.setState({ loading: false, showPurchasingModal: false });
+        // Gui Query sang router kia nhu data
+        this.props.history.push({
+            pathname: '/checkout',
+            search: stringQuerryParams
+        });
+        //this.props.history.location.pathname(or .search ......)
 
-            })
+
     }
     //====================================================
     addIngredientHandle(type) {
@@ -136,6 +141,8 @@ export default class BurgerBuilder extends Component {
         for (let type in disabledInfo) {
             disabledInfo[type] = disabledInfo[type] === 0;
         }
+        console.log(this.props);
+
         return (
 
             <Aux>
@@ -143,31 +150,41 @@ export default class BurgerBuilder extends Component {
                 {/*showPurchasingModal= Bat tat modle */}
                 {/*Loading= vi Modal co ham shouldComponentUpdate nen chuyen sang de kiem tra re-render */}
                 {/*hiddenPurchasingModalHandle thay doi showPurchasingModal  */}
-                <Modal showPurchasingModal={this.state.showPurchasingModal}
-                    hiddenPurchasingModalHandle={this.hiddenPurchasingModalHandle.bind(this)}
-                    loading={this.state.loading} >
-                    {this.state.loading ? <Spinner /> : (<OrderSummary
-                        ingredients={this.state.ingredients}
+
+
+                {this.state.loading ? (
+                    <Spinner />
+                ) : (<Aux>
+                    <Modal showPurchasingModal={this.state.showPurchasingModal}
                         hiddenPurchasingModalHandle={this.hiddenPurchasingModalHandle.bind(this)}
-                        continuePruchasingModalHandle={this.continuePruchasingModalHandle.bind(this)}
-                        totalPrice={this.state.totalPrice.toFixed(2)}
+                        loading={this.state.loading} >
+                        {this.state.loading ? <Spinner /> : (<OrderSummary
+                            ingredients={this.state.ingredients}
+                            hiddenPurchasingModalHandle={this.hiddenPurchasingModalHandle.bind(this)}
+                            continuePruchasingModalHandle={this.continuePruchasingModalHandle.bind(this)}
+                            totalPrice={this.state.totalPrice.toFixed(2)}
+                        />
+
+                        )}
+
+                    </Modal>
+                    <Burger ingredients={this.state.ingredients} />
+                    <BurgerControls
+                        addIngredientHandle={this.addIngredientHandle.bind(this)}
+                        removeIngredientHandle={this.removeIngredientHandle.bind(this)}
+                        disabledInfo={disabledInfo}
+                        totalPrice={this.state.totalPrice}
+                        purchasable={this.state.purchasable}
+                        showPurchasingModalHandle={this.showPurchasingModalHandle.bind(this)}
                     />
 
-                    )}
+                </Aux>)}
 
-                </Modal>
+            </Aux>
 
-                <Burger ingredients={this.state.ingredients} />
-                <BurgerControls
-                    addIngredientHandle={this.addIngredientHandle.bind(this)}
-                    removeIngredientHandle={this.removeIngredientHandle.bind(this)}
-                    disabledInfo={disabledInfo}
-                    totalPrice={this.state.totalPrice}
-                    purchasable={this.state.purchasable}
-                    showPurchasingModalHandle={this.showPurchasingModalHandle.bind(this)}
-                />
-
-            </Aux >
         )
     }
 }
+
+
+export default withErrorHandle(BurgerBuilder)

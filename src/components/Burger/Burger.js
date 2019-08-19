@@ -19,7 +19,8 @@ export default (props) => {
     // console.log(transformedIngredient.length)
 
     return (
-        <div className={classes.Burger}>
+        // style de anoverflow :scroll khi view checkout
+        <div className={classes.Burger} style={props.style}>
             <BurgerGredient type='bread-top' />
             {
             
