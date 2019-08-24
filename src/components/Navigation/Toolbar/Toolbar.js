@@ -6,8 +6,8 @@ import DrawToggle from './DrawToggle/DrawToggle'
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import SideDrawer from '../SideDrawer/SideDrawer'
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
-
-export default class extends Component {
+import {connect} from 'react-redux'
+class Toolbar extends Component {
     state={
         showBackdrop:false,
         showSideDrawer:false
@@ -29,7 +29,7 @@ export default class extends Component {
                 <DrawToggle clicked={this.showSideDrawerHandle.bind(this)} />
                 <NavLink to='/'><Logo /></NavLink>
                 <nav className={classes.Nav}>
-                    <NavigationItems toolBar={true} />
+                    <NavigationItems toolBar={true} isAuthenticated={this.props.isAuthenticated} />
                 </nav>
             </header>
         )
@@ -37,3 +37,14 @@ export default class extends Component {
 
 
 }
+const mapStateToProps = (state, ownProps) => {
+    return {
+        isAuthenticated: state.AuthReducer.idToken!=null
+    }
+}
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Toolbar)

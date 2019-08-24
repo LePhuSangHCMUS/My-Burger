@@ -4,6 +4,7 @@ import Checkout from './containers/Checkout/Checkout'
 import ContactData from './containers/Checkout/ContactData/ContactData'
 import Orders from './containers/Orders/Orders'
 import { BrowserRouter as Router, Route, NavLink ,Switch} from "react-router-dom";
+import Auth from './containers/Auth/Auth'
 
 class RouterRedirect extends Component {
     render() {
@@ -16,6 +17,7 @@ class RouterRedirect extends Component {
                     <Route path="/checkout" exact component={Checkout} />
                     <Route path="/checkout/contact-data" exact component={ContactData} />
                     <Route path="/orders" exact component={Orders} />
+                    <Route path="/authentication" exact component={Auth} />
                     
                 </Switch>
 

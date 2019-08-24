@@ -1,0 +1,13 @@
+.Auth{
+    width: 60%;
+    border: 1px solid gray;
+    margin: 2rem auto;
+}
+.Form{
+    padding: 1rem;
+}
+@media only screen and (max-width: 600px) {
+    .Auth{
+        width: 90%;
+    }
+}

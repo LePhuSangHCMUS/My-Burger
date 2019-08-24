@@ -2,20 +2,21 @@ import React, { Component } from 'react'
 import OrderItem from '../../components/OrderItem/OrderItem'
 import axiosInstance from '../../axios-orders-instance'
 import Spinner from '../../components/UI/Spinner/Spinner';
-export default class Orders extends Component {
+import {connect} from 'react-redux'
+ class Orders extends Component {
     state = {
         orders: {},
         loading: true,
     }
     componentDidMount() {
-        axiosInstance.get('/orders.json')
+        //Moi lan gui request phai gui them token de xac minh tai khoan
+        axiosInstance.get('/orders.json?auth='+this.props.token)
             .then(response => {
                 
                 console.log(response);
                 this.setState({ loading: false })
                 if(response.data){
                     this.setState({ orders: response.data })
-
                 }
             })
             .catch(err => {
@@ -42,3 +43,15 @@ export default class Orders extends Component {
         )
     }
 }
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+      
+    }
+}
+const mapStateToProps = (state, ownProps) => {
+    return {
+        token: state.AuthReducer.idToken
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Orders)

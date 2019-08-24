@@ -6,7 +6,7 @@ import Burger from '../Burger/Burger'
 import Btn from '../UI/Button/Button'
 import { withRouter } from 'react-router-dom'
 const CheckoutSummary = (props) => {
-console.log(props);
+    console.log(props);
 
     let checkoutCancelled = function () {
         //Quay ve tran chu        
@@ -15,28 +15,28 @@ console.log(props);
         // props.history.push('/');
 
     }
-    let checkoutContinued=function(){
+    let checkoutContinued = function () {
         //Loai bo trang truwoc do khoi dtack va thay the luon khi goBack thi trang kia khong con nua
         // props.history.replace('/checkout/contact-data');
 
         //===> Viet cach khac de gui da ta thong qua router dung :  Query Params
-        let queryParams = [];
+        // let queryParams = [];
 
-        for (let i in props.ingredients) {
-            //encodeURIComponent tao mot chuoi hop le tren URL
-            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(props.ingredients[i]))
-        }
-        queryParams.push(encodeURIComponent("totalPrice")+'='+encodeURIComponent(props.totalPrice))
+        // for (let i in props.ingredients) {
+        //     //encodeURIComponent tao mot chuoi hop le tren URL
+        //     queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(props.ingredients[i]))
+        // }
+        // queryParams.push(encodeURIComponent("totalPrice")+'='+encodeURIComponent(props.totalPrice))
 
-        const stringQuerryParams=queryParams.join('&');
-        
+        // const stringQuerryParams=queryParams.join('&');
+
 
         // Gui Query sang router kia nhu data
         props.history.push({
-            pathname: '/checkout/contact-data',
-            search: stringQuerryParams
+            pathname: '/checkout/contact-data'
+            // search: stringQuerryParams
         });
-
+        //=========DUNG REDUX=============
     }
 
     return (
