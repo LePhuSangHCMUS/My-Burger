@@ -34,23 +34,23 @@ import { BrowserRouter } from 'react-router-dom'
 
 // })
 //=================MUON IN RA THi Phai DUNG AXIOS InSTANCE 
-// AxiosInstance.interceptors.request.use(request => {
+AxiosInstance.interceptors.request.use(request => {
 
-//     console.log('Request', request);
-//     return request;//Nho return 
+    console.log('Request', request);
+    return request;//Nho return 
 
-// }, err => {
-//     console.log('Request Error', err);
+}, err => {
+    console.log('Request Error', err);
 
-// })
-// AxiosInstance.interceptors.response.use(response => {
-//     console.log('Response', response);
-//     return response;//Nho return 
+})
+AxiosInstance.interceptors.response.use(response => {
+    console.log('Response', response);
+    return response;//Nho return 
 
-// }, err => {
-//     console.log('Response Error', err);
+}, err => {
+    console.log('Response Error', err);
 
-// })
+})
 ReactDOM.render(
     <BrowserRouter>
         <App />
