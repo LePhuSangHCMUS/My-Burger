@@ -53,7 +53,7 @@ import { BrowserRouter } from 'react-router-dom'
 // })
 ReactDOM.render(
     <BrowserRouter>
-        <App />
+        {/* <App /> */}
     </BrowserRouter>
 
 
@@ -63,3 +63,4 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+//Add comment
